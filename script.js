@@ -77,8 +77,17 @@ function iniciarJogo() {
     if(direction == "up") snakeY -= box;
     if(direction == "down") snakeY += box;
 
-    // 10 - retirar o ultimo elemento do array
-    snake.pop();
+    // 19 - condição para a cobrinha aumentar de tamanho o a comida aparecer em outro local
+    // 19.1 - colocar o pop dentro da condição
+    if(snakeX != food.x || snakeY != food.y) {
+        // 10 - retirar o ultimo elemento do array 
+        snake.pop();
+    }else {
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
+
+    
     
     // 11 - criando uma nova cabeça
     let newHead = {
