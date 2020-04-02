@@ -8,6 +8,9 @@ snake[0] = {
     y: 8 * box
 }
 
+// criar uma variavel para direção da cobrinha
+let direction = "right";
+
 function criarBG() {
     context.fillStyle = "lightgreen";
     // fillRect desenha o quadrado onde será o jogo
@@ -17,13 +20,39 @@ function criarBG() {
 function criarCobrinha() {
     for(i = 0; i <snake.length; i++) {
         context.fillStyle = "green";
-        context.fillRect(snake[i].x, snake[i].y, box, box);
+        context.fillRect (snake[i].x, snake[i].y, box, box);
     }
 }
 
+function iniciarJogo() {
+    // chamando a função para criar o quadrado
+    criarBG();  
 
-// chamando a função para criar o quadrado
-criarBG();  
+    // função para criar a cobrinha
+    criarCobrinha(); 
 
-// função para criar a cobrinha
-criarCobrinha(); 
+    // ponto de partida
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    // criando as coordenadas
+    if(direction == "right") snakeX += box;
+    if(direction == "left") snakeX -= box;
+    if(direction == "up") snakeY -= box;
+    if(direction == "down") snakeY += box;
+
+    // retirar o ultimo elemento do array
+    snake.pop();
+    
+    // criando uma nova cabeça
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+}
+
+let jogo = setInterval(iniciarJogo, 100);
+
+
